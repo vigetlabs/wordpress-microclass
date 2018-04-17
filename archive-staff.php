@@ -1,18 +1,11 @@
-<?php get_header(); ?>
+<?php
+  $context = Timber::get_context();
 
-<?php if (have_posts()) { ?>
+  $args = array(
+    'post_type' => 'staff',
+    'order' => 'ASC',
+    'orderby' => 'title',
+  );
+  $context['posts'] = new Timber\PostQuery($args);
 
-  <h1>Staff</h1>
-
-  <ul>
-    <?php while (have_posts()) { ?>
-      <?php the_post(); ?>
-
-      <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
-
-    <?php } ?>
-  </ul>
-
-<?php } ?>
-
-<?php get_footer(); ?>
+  Timber::render( array( 'archive-staff.twig' ), $context );

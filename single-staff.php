@@ -1,16 +1,15 @@
-<?php get_header(); ?>
+<?php
+  $context = Timber::get_context();
+  $context['post'] = new Timber\Post();
 
-<?php if (have_posts()) { ?>
+  $staffList = new WP_Query([
+    'post_type' => 'staff',
+    'numberposts' => -1,
+    'post__not_in' => array($post->ID),
+    'order' => 'ASC',
+    'orderby' => 'title'
+  ]);
 
-  <?php while (have_posts()) { ?>
+  $context['staff_list'] = Timber::get_posts($staffList);
 
-    <?php the_post(); ?>
-
-    <h1><?php the_title(); ?></h1>
-    <?php the_content(); ?>
-
-  <?php } ?>
-
-<?php } ?>
-
-<?php get_footer(); ?>
+  Timber::render( array( 'single-staff.twig' ), $context );

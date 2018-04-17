@@ -2,4 +2,4 @@
   $context = Timber::get_context();
   $context['post'] = new Timber\Post();
 
-  Timber::render( array( 'index.twig' ), $context );
+  Timber::render( array( 'home.twig' ), $context );
