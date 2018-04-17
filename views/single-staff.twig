@@ -2,7 +2,16 @@
 
 {% block content %}
 
+  {%- set photo = TimberImage(post.photo) -%}
+  {%- if photo -%}
+    <img alt="" src="{{ photo|resize(500) }}">
+  {%- endif -%}
+
   <h1>{{ post.title }}</h1>
+
+  <p>
+    <em>{{ post.job_title }}</em>
+  </p>
 
   {{ post.content }}
 
